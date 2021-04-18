@@ -58,7 +58,10 @@ def preprocess(data,hint=None,do_lower=True):
     return data
 
 
-
+TOXICITY_COLUMN = 'target'
+SUBGROUP_AUC = 'subgroup_auc'
+BPSN_AUC = 'bpsn_auc'  # stands for background positive, subgroup negative
+BNSP_AUC = 'bnsp_auc'  # stands for background negative, subgroup positive
 
 ## From baseline kernel
 def calculate_overall_auc(df, model_name):
@@ -77,11 +80,6 @@ def get_final_metric(bias_df, overall_auc, POWER=-5, OVERALL_MODEL_WEIGHT=0.25):
         power_mean(bias_df[BNSP_AUC], POWER)
     ])
     return (OVERALL_MODEL_WEIGHT * overall_auc) + ((1 - OVERALL_MODEL_WEIGHT) * bias_score)
-
-
-SUBGROUP_AUC = 'subgroup_auc'
-BPSN_AUC = 'bpsn_auc'  # stands for background positive, subgroup negative
-BNSP_AUC = 'bnsp_auc'  # stands for background negative, subgroup positive
 
 def compute_auc(y_true, y_pred):
     try:
