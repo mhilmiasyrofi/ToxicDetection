@@ -13,7 +13,7 @@ docker pull gcr.io/kaggle-gpu-images/python@sha256:36cf6c012f2c2a866c63ef04c1356
 
 Run docker as a container
 ```bash
-docker run ....
+docker run --name toxic-prediction --rm --gpus '"device=0"' -it -p 8080:8080  -v  <path to ToxicDetection>:/home/jupyter/ToxicDetection/ gcr.io/kaggle-gpu-images/python@sha256:36cf6c012f2c2a866c63ef04c13567cd34b2097c27ae22eb096a8f2f0da7d82b
 ```
 
 ### Dataset and Final Model
